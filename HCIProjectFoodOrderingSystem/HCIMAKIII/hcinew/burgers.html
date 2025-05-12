@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<head>
+    <title>Burger Menu</title>
+    <link rel="stylesheet" href="friedchicken.css">
+    <style>
+        
+        .cancel-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; 
+        }
+        .no-order-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; 
+        }
+      
+        .cancel-dialog {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .cancel-dialog h2 {
+            margin-top: 0;
+        }
+
+        .cancel-dialog button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        #confirmCancelButton, #resumeCancelButton, #resumeNoOrderButton {
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            height: 50px;
+            width: 150px; 
+            text-align: center; 
+            display: inline-block;
+        }
+
+        #confirmCancelButton:hover, #resumeCancelButton:hover, #resumeNoOrderButton:hover {
+            background-color: #45a049; 
+        }
+     
+        #cancelOrderButton, #doneButton {
+            background-color: #313131; 
+            color: orange;
+            border: none; 
+            display: inline-block;
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 30px; 
+            height: 50px;
+            width: 550px; 
+
+            margin-left: 100px ;
+        }
+        #cancelOrderButton:hover, #doneButton:hover {
+            background-color: #595959; 
+        }
+        .sidebar {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 30px 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <video autoplay muted loop class="banner-video">
+            <source src="FoodVideo.mp4" type="video/mp4">
+        </video>
+        <div class="banner-overlay">
+        </div>
+    </div>
+    <div class="header"></div>
+    <div class="sidebar">
+        <a href="#burger"><img src="chisburgir.jpg" alt="Burgers"></a>
+        <a href="#fries"><img src="fries.jpg" alt="Fries"></a>
+        <a href="#fried-chicken"><img src="fchicken.jpg" alt="Fried Chicken"></a>
+        <a href="#ice-cream"><img src="icecream.jpg" alt="Ice Cream"></a>
+        <a href="#drinks"><img src="drinks.jpg" alt="Drinks"></a>
+    </div>
+
+    <h2 id="burger">BURGER</h2>
+    <div class="columns-container">
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Cheese Burger" data-item-price="10">
+                <img src="chisburgir.jpg" alt="Cheese Burger">
+                <div class="burger-info">
+                    <h3>Cheese Burger</h3>
+                    <div class="price-checkbox">
+                        <span class="price">10$</span>
+                        <input type="checkbox" name="item" value="cheese-burger">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Chicken Burger" data-item-price="12">
+                <img src="ch burger.jpg" alt="Chicken Burger">
+                <div class="burger-info">
+                    <h3>Chicken Burger</h3>
+                    <div class="price-checkbox">
+                        <span class="price">12$</span>
+                        <input type="checkbox" name="item" value="chicken-burger">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="BBQ Burger" data-item-price="15">
+                <img src="bbqburger.jpg" alt="BBQ Burger">
+                <div class="burger-info">
+                    <h3>BBQ Burger</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="bbq-burger">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Mc Earon's Special Signature" data-item-price="20">
+                <img src="bigmakigalimbas.jpg" alt="Mc Earon's Special Signature">
+                <div class="burger-info">
+                    <h3>Mc Earon's Special Signature</h3>
+                    <div class="price-checkbox">
+                        <span class="price">20$</span>
+                        <input type="checkbox" name="item" value="mc-earons-special-signature">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Bacon Cheese Burger" data-item-price="15">
+                <img src="bcburger.jpg" alt="Bacon Cheese Burger">
+                <div class="burger-info">
+                    <h3>Bacon Cheese Burger</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="bacon-cheese-burger">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Patty Melt Sandwich" data-item-price="18">
+                <img src="sndwch.jpg" alt="Patty Melt Sandwich">
+                <div class="burger-info">
+                    <h3>Patty Melt Sandwich</h3>
+                    <div class="price-checkbox">
+                        <span class="price">18$</span>
+                        <input type="checkbox" name="item" value="patty-melt-sandwich">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 id="fried-chicken">FRIED CHICKEN</h2>
+    <div class="columns-container">
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Regular Fried Chicken" data-item-price="10">
+                <img src="fchicken.jpg" alt="Regular Fried Chicken">
+                <div class="burger-info">
+                    <h3>Regular Fried Chicken</h3>
+                    <div class="price-checkbox">
+                        <span class="price">10$</span>
+                        <input type="checkbox" name="item" value="regular-fried-chicken">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Chicken Tenders" data-item-price="15">
+                <img src="ctfc.jpg" alt="Chicken Tenders">
+                <div class="burger-info">
+                    <h3>Chicken Tenders</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="chicken-tenders">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Buffalo Wings" data-item-price="20">
+                <img src="bfwings.jpg" alt="Buffalo Wings">
+                <div class="burger-info">
+                    <h3>Buffalo Wings</h3>
+                    <div class="price-checkbox">
+                        <span class="price">20$</span>
+                        <input type="checkbox" name="item" value="buffalo-wings">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Chicken Nuggets" data-item-price="10">
+                <img src="cnuggets.jpg" alt="Chicken Nuggets">
+                <div class="burger-info">
+                    <h3>Chicken Nuggets</h3>
+                    <div class="price-checkbox">
+                        <span class="price">10$</span>
+                        <input type="checkbox" name="item" value="chicken-nuggets">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Spicy Fried Chicken" data-item-price="15">
+                <img src="spicychken.jpg" alt="Spicy Fried Chicken">
+                <div class="burger-info">
+                    <h3>Spicy Fried Chicken</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="spicy-fried-chicken">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Popcorn Chicken" data-item-price="15">
+                <img src="pcchicken.jpg" alt="Popcorn Chicken">
+                <div class="burger-info">
+                    <h3>Popcorn Chicken</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="popcorn-chicken">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 id="ice-cream">ICE CREAM</h2>
+    <div class="columns-container">
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Vanilla Ice cream" data-item-price="5">
+                <img src="vicecream.jpg" alt="Vanilla Ice cream">
+                <div class="burger-info">
+                    <h3>Vanilla Ice cream</h3>
+                    <div class="price-checkbox">
+                        <span class="price">5$</span>
+                        <input type="checkbox" name="item" value="vanilla-ice-cream">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Chococlate Ice cream" data-item-price="5">
+                <img src="chicecream.jpg" alt="Chococlate Ice cream">
+                <div class="burger-info">
+                    <h3>Chococlate Ice cream</h3>
+                    <div class="price-checkbox">
+                        <span class="price">5$</span>
+                        <input type="checkbox" name="item" value="chocolate-ice-cream">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Cookies and Cream Ice cream" data-item-price="5">
+                <img src="ccicecream.jpg" alt="Cookies and Cream Ice cream">
+                <div class="burger-info">
+                    <h3>Cookies and Cream Ice cream</h3>
+                    <div class="price-checkbox">
+                        <span class="price">5$</span>
+                        <input type="checkbox" name="item" value="cookies-and-cream-ice-cream">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Rocky Road Ice cream" data-item-price="15">
+                <img src="rricecream.jpg" alt="Rocky Road Ice cream">
+                <div class="burger-info">
+                    <h3>Rocky Road Ice cream</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="rocky-road-ice-cream">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Strawberry Ice cream" data-item-price="15">
+                <img src="strbrryicecream.jpg" alt="Strawberry Ice cream">
+                <div class="burger-info">
+                    <h3>Strawberry Ice cream</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="strawberry-ice-cream">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Dark Chocolate Ice cream" data-item-price="15">
+                <img src="drkcicecream.jpg" alt="Dark Chocolate Ice cream">
+                <div class="burger-info">
+                    <h3>Dark Chocolate Ice cream</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="dark-chocolate-ice-cream">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 id="drinks">DRINKS</h2>
+    <div class="columns-container">
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Coke" data-item-price="2">
+                <img src="coke.jpg" alt="Coke">
+                <div class="burger-info">
+                    <h3>Coke</h3>
+                    <div class="price-checkbox">
+                        <span class="price">2$</span>
+                        <input type="checkbox" name="item" value="coke">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Iced Tea" data-item-price="5">
+                <img src="icedtea.jpg" alt="Iced Tea">
+                <div class="burger-info">
+                    <h3>Iced Tea</h3>
+                    <div class="price-checkbox">
+                        <span class="price">5$</span>
+                        <input type="checkbox" name="item" value="iced-tea">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Iced Coffee" data-item-price="5">
+                <img src="icedcoffee.jpg" alt="Iced Coffee">
+                <div class="burger-info">
+                    <h3>Iced Coffee</h3>
+                    <div class="price-checkbox">
+                        <span class="price">5$</span>
+                        <input type="checkbox" name="item" value="iced-coffee">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Mountain Dew" data-item-price="10">
+                <img src="mtdew.jpg" alt="Mountain Dew">
+                <div class="burger-info">
+                    <h3>Mountain Dew</h3>
+                    <div class="price-checkbox">
+                        <span class="price">10$</span>
+                        <input type="checkbox" name="item" value="mountain-dew">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Lemonade" data-item-price="10">
+                <img src="lemonade.jpg" alt="Lemonade">
+                <div class="burger-info">
+                    <h3>Lemonade</h3>
+                    <div class="price-checkbox">
+                        <span class="price">10$</span>
+                        <input type="checkbox" name="item" value="lemonade">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Orange Juice" data-item-price="10">
+                <img src="orange.jpg" alt="Orange Juice">
+                <div class="burger-info">
+                    <h3>Orange Juice</h3>
+                    <div class="price-checkbox">
+                        <span class="price">10$</span>
+                        <input type="checkbox" name="item" value="orange-juice">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 id="fries">FRIES</h2>
+    <div class="columns-container">
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Regular Fries" data-item-price="5">
+                <img src="fries.jpg" alt="Regular Fries">
+                <div class="burger-info">
+                    <h3>Regular Fries</h3>
+                    <div class="price-checkbox">
+                        <span class="price">5$</span>
+                        <input type="checkbox" name="item" value="regular-fries">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Tater Tots" data-item-price="12">
+                <img src="tts.jpg" alt="Tater Tots">
+                <div class="burger-info">
+                    <h3>Tater Tots</h3>
+                    <div class="price-checkbox">
+                        <span class="price">12$</span>
+                        <input type="checkbox" name="item" value="tater-tots">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Cottage Fries" data-item-price="10">
+                <img src="ctgefries.jpg" alt="Cottage Fries">
+                <div class="burger-info">
+                    <h3>Cottage Fries</h3>
+                    <div class="price-checkbox">
+                        <span class="price">10$</span>
+                        <input type="checkbox" name="item" value="cottage-fries">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-column">
+            <div class="burger-item" data-item-name="Curly Fries" data-item-price="15">
+                <img src="curly fries.jpg" alt="Curly Fries">
+                <div class="burger-info">
+                    <h3>Curly Fries</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="curly-fries">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Loaded Fries Overload" data-item-price="25">
+                <img src="ccfries.jpg" alt="Loaded Fries Overload">
+                <div class="burger-info">
+                    <h3>Loaded Fries Overload</h3>
+                    <div class="price-checkbox">
+                        <span class="price">25$</span>
+                        <input type="checkbox" name="item" value="loaded-fries-overload">
+                    </div>
+                </div>
+            </div>
+            <div class="burger-item" data-item-name="Waffle Fries" data-item-price="15">
+                <img src="wfflefries.jpg" alt="Waffle Fries">
+                <div class="burger-info">
+                    <h3>Waffle Fries</h3>
+                    <div class="price-checkbox">
+                        <span class="price">15$</span>
+                        <input type="checkbox" name="item" value="waffle-fries">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button id="cancelOrderButton">CANCEL ORDER</button>
+        <button id="doneButton">DONE</button>
+    </div>
+
+<div id="cancelOverlay" class="cancel-overlay">
+    <div class="cancel-dialog">
+        <h2>YOU WANT TO CANCEL YOUR ORDER</h2>
+        <p>IF YOU CANCEL YOUR ORDER IT WOULD GO BACK TO THE HOME SCREEN</p>
+        <div>
+            <button id="confirmCancelButton">CANCEL</button>
+            <button id="resumeCancelButton">RESUME</button> <!-- Unique ID -->
+        </div>
+    </div>
+</div>
+
+<div id="noOrderOverlay" class="no-order-overlay">
+    <div class="cancel-dialog">
+        <h2>YOU NEED TO SELECT AT LEAST ONE ITEM FIRST</h2>
+        <p>Please select an item to proceed with your order.</p>
+        <div>
+            <button id="resumeNoOrderButton">OK</button> <!-- Unique ID -->
+        </div>
+    </div>
+</div>
+
+    <script>
+        const cancelOrderButton = document.getElementById('cancelOrderButton');
+        const cancelOverlay = document.getElementById('cancelOverlay');
+        const confirmCancelButton = document.getElementById('confirmCancelButton');
+        const resumeCancelButton = document.getElementById('resumeCancelButton'); // Updated ID
+        const doneButton = document.getElementById('doneButton');
+        const noOrderOverlay = document.getElementById('noOrderOverlay');
+        const resumeNoOrderButton = document.getElementById('resumeNoOrderButton'); // Updated ID
+
+// Show the "Cancel Order" overlay
+if (cancelOrderButton) {
+    cancelOrderButton.addEventListener('click', () => {
+        cancelOverlay.style.display = 'flex';
+    });
+}
+
+// Redirect to the home page when "CANCEL" is clicked
+if (confirmCancelButton) {
+    confirmCancelButton.addEventListener('click', () => {
+        window.location.href = 'main.html';
+    });
+}
+
+// Hide the "Cancel Order" overlay when "RESUME" is clicked
+if (resumeCancelButton) {
+    resumeCancelButton.addEventListener('click', () => {
+        cancelOverlay.style.display = 'none';
+    });
+}
+
+// Show the "No Order Selected" overlay when no items are selected
+if (doneButton) {
+    doneButton.addEventListener('click', () => {
+        const selectedItems = [];
+        const checkboxes = document.querySelectorAll('input[name="item"]:checked');
+
+        // Check if no items are selected
+        if (checkboxes.length === 0) {
+            noOrderOverlay.style.display = 'flex'; // Show the "No Order Selected" overlay
+            return; // Stop further execution
+        }
+
+        // Process selected items
+        checkboxes.forEach(checkbox => {
+            const burgerItem = checkbox.closest('.burger-item');
+            const itemName = burgerItem.dataset.itemName;
+            const itemPrice = parseFloat(burgerItem.dataset.itemPrice);
+            selectedItems.push({ name: itemName, price: itemPrice, quantity: 1 });
+        });
+
+        // Save the selected items to localStorage
+        localStorage.setItem('orderItems', JSON.stringify(selectedItems));
+
+        // Redirect to the order list page
+        window.location.href = 'orderlist.html';
+    });
+}
+
+// Hide the "No Order Selected" overlay when "OK" is clicked
+if (resumeNoOrderButton) {
+    resumeNoOrderButton.addEventListener('click', () => {
+        noOrderOverlay.style.display = 'none';
+    });
+}
+    </script>
+</body>
+</html>
